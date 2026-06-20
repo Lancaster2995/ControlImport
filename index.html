@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Control DM · Importación BPA</title>
+<meta name="description" content="Control local de importación de dispositivos médicos según Buenas Prácticas de Almacenamiento (BPA) DIGEMID: ingresos, salidas, cuarentena, kardex y registros sanitarios.">
+
+<!-- PWA -->
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#131815">
+<link rel="icon" type="image/png" sizes="32x32" href="./icons/icon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+<link rel="icon" href="./favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="./icons/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Control DM">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+
+<!-- Google Identity Services: solo se usa si el usuario conecta Google Drive desde Exportar -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+<div id="app">
+  <nav class="sidebar">
+    <div class="brand">
+      <span class="brand-name">Control DM</span>
+      <span class="brand-sub">Importación · BPA<br>DIGEMID</span>
+    </div>
+    <div class="nav-block">
+      <span class="nav-label">Movimientos</span>
+      <button class="nav-btn" data-view="dashboard" onclick="App.setView('dashboard')">Panel</button>
+      <button class="nav-btn" data-view="ingresos" onclick="App.setView('ingresos')">Ingresos</button>
+      <button class="nav-btn" data-view="salidas" onclick="App.setView('salidas')">Salidas</button>
+      <button class="nav-btn" data-view="cuarentena" onclick="App.setView('cuarentena')">Cuarentena</button>
+    </div>
+    <div class="nav-block">
+      <span class="nav-label">Control</span>
+      <button class="nav-btn" data-view="kardex" onclick="App.setView('kardex')">Kardex / Trazabilidad</button>
+      <button class="nav-btn" data-view="registros" onclick="App.setView('registros')">Registros Sanitarios</button>
+    </div>
+    <div class="nav-block">
+      <span class="nav-label">Sistema</span>
+      <button class="nav-btn" data-view="exportar" onclick="App.setView('exportar')">Exportar</button>
+    </div>
+    <div class="sidebar-foot">
+      <span class="sidebar-foot-dt" id="sf-dt">Sin configurar</span>
+      <span class="sidebar-foot-meta">Datos locales · sincronización opcional</span>
+    </div>
+  </nav>
+  <main class="content">
+    <header class="topbar">
+      <span class="view-bc" id="view-bc">Panel</span>
+      <div class="topbar-r">
+        <button class="alert-bell" id="alert-bell-btn" onclick="App.setView('dashboard')">
+          <span id="alert-count">0</span> alerta(s)
+        </button>
+      </div>
+    </header>
+    <div id="view-root"></div>
+  </main>
+</div>
+<div id="modal-root"></div>
+<div id="toast-root"></div>
+
+<script src="./app.js"></script>
+</body>
+</html>
